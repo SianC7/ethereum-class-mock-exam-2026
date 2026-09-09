@@ -133,8 +133,8 @@ Deployment two, your token B: same again, with `Cafeteria Points`, `CAFE`, and t
 recover if you lose them. (Replace the underscores in the table below with your addresses, the 0x is just a hint at what the address should look like, so remove it too before you paste.)
 
 ```
-Token A address 0x ______________________________________
-Token B address 0x ______________________________________
+Token A address 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B (TUT)
+Token B address 0xDA0bab807633f07f013f94DD0E6A4F96F8742B53 (CAFE)
 ```
 
 ---
