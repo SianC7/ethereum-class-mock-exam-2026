@@ -12,7 +12,11 @@ abstract contract ERC20 {
     mapping(address => mapping(address => uint256)) public allowance;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     constructor(string memory _name, string memory _symbol, uint8 _decimals) {
         name = _name;
@@ -20,17 +24,26 @@ abstract contract ERC20 {
         decimals = _decimals;
     }
 
-    function approve(address spender, uint256 amount) public virtual returns (bool) {
+    function approve(
+        address spender,
+        uint256 amount
+    ) public virtual returns (bool) {
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
-    function transfer(address to, uint256 amount) public virtual returns (bool) {
+    function transfer(
+        address to,
+        uint256 amount
+    ) public virtual returns (bool) {
         // Without this the shortfall shows up as a bare arithmetic panic, which is
         // very hard to read. The usual cause is a number typed with the wrong number
         // of zeros, since this token has 18 decimals.
-        require(balanceOf[msg.sender] >= amount, "ERC20: balance too small, check the decimals on the amount");
+        require(
+            balanceOf[msg.sender] >= amount,
+            "ERC20: balance too small, check the decimals on the amount"
+        );
         balanceOf[msg.sender] -= amount;
         unchecked {
             balanceOf[to] += amount;
@@ -39,11 +52,19 @@ abstract contract ERC20 {
         return true;
     }
 
-    function transferFrom(address from, address to, uint256 amount) public virtual returns (bool) {
+    function transferFrom(
+        address from,
+        address to,
+        uint256 amount
+    ) public virtual returns (bool) {
         uint256 allowed = allowance[from][msg.sender];
         require(allowed >= amount, "ERC20: not approved for that amount");
-        require(balanceOf[from] >= amount, "ERC20: balance too small, send tokens to that contract first");
-        if (allowed != type(uint256).max) allowance[from][msg.sender] = allowed - amount;
+        require(
+            balanceOf[from] >= amount,
+            "ERC20: balance too small, send tokens to that contract first"
+        );
+        if (allowed != type(uint256).max)
+            allowance[from][msg.sender] = allowed - amount;
         balanceOf[from] -= amount;
         unchecked {
             balanceOf[to] += amount;
@@ -53,10 +74,11 @@ abstract contract ERC20 {
     }
 
     function _mint(address to, uint256 amount) internal virtual {
+        // Increases totalSupply by input amount
         totalSupply += amount;
         unchecked {
-            balanceOf[to] += amount;
+            balanceOf[to] += amount; // Credits to's balance by amount — that address's balanceOf goes up.
         }
-        emit Transfer(address(0), to, amount);
+        emit Transfer(address(0), to, amount); // Signals to the world that new tokens have been created and sent to `to`.
     }
 }
