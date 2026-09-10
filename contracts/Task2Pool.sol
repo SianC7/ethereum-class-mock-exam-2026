@@ -18,7 +18,13 @@ contract Task2Pool is ExamBase {
     uint160 public immutable sqrtPriceIfTokenALower;
     uint160 public immutable sqrtPriceIfTokenBLower;
 
-    event PoolReady(bytes32 poolId, address currency0, address currency1, uint160 sqrtPriceX96, int24 tick);
+    event PoolReady(
+        bytes32 poolId,
+        address currency0,
+        address currency1,
+        uint160 sqrtPriceX96,
+        int24 tick
+    );
 
     constructor(
         address _poolManager,
@@ -46,27 +52,36 @@ contract Task2Pool is ExamBase {
         // Return whichever of the two prices belongs to the sort order you actually got.
         // Replace the line below.
 
-        return 0; // <-- replace this
+        if (currency0() == tokenA) {
+            return sqrtPriceIfTokenALower;
+        } else {
+            return sqrtPriceIfTokenBLower;
+        }
+        // OR: return alphaIsCurrency0() ? sqrtPriceIfTokenALower : sqrtPriceIfTokenBLower;
     }
 
     /// @notice Opens the pool. You only ever call this once.
     function openPool() external returns (int24 tick) {
-        require(!poolExists(), "this pool is already open, you only open it once");
+        require(
+            !poolExists(),
+            "this pool is already open, you only open it once"
+        );
 
         PoolKey memory key = poolKey();
         uint160 startingPrice = startingSqrtPriceX96();
-        require(startingPrice != 0, "startingSqrtPriceX96 still returns zero, finish TODO 2.1 first");
+        require(
+            startingPrice != 0,
+            "startingSqrtPriceX96 still returns zero, finish TODO 2.1 first"
+        );
 
         // TODO 2.2 --------------------------------------------------------
         // Open the pool.
         //
-        //     poolManager.initialize(key, startingPrice)
+        tick = poolManager.initialize(key, startingPrice); // price = 1.0001^tick
         //
         // takes the pool key and the starting price, and hands back the tick the pool
         // opened at. That returned tick belongs in the variable below.
         // Replace the line below.
-
-        tick = 0; // <-- replace this
 
         // TODO 2.3 --------------------------------------------------------
         // Announce it, so the marker can see what you did. Emit PoolReady. Look at
@@ -78,6 +93,6 @@ contract Task2Pool is ExamBase {
         //
         // ExamBase gives you poolId(), currency0() and currency1().
         // Write one emit statement below.
-
+        emit PoolReady(poolId(), currency0(), currency1(), startingPrice, tick);
     }
 }
