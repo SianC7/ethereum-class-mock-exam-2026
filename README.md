@@ -238,6 +238,18 @@ Your live tick may well be negative, depending on which of your tokens became cu
 normal and nothing is wrong. The same method works: with spacing 200 and a live tick of -8642, you
 could use -8800 in the middle, so -12800 and -4800.
 
+With spacing 200 and live tick -27728:
+
+Step 1 — snap down to the nearest multiple of 200 (more negative):
+-27728 / 200 = -138.64 → round down (away from zero, more negative) → -139 × 200 = -27800
+
+Check: -27800 ≤ -27728 < -27600 ✓ (it's the multiple at or below).
+
+Step 2 — go 20 spacings (4000) either side:
+
+tickLower = -27800 − 4000 = -31800
+tickUpper = -27800 + 4000 = -23800
+
 **Call `addLiquidity`** with your `tickLower`, your `tickUpper`, and `50000000000000000000000`. In
 the terminal, expand the transaction and look at **decoded output**. It gives you `amount0` and
 `amount1`, both negative because the tokens left your contract.
@@ -245,11 +257,11 @@ the terminal, expand the transaction and look at **decoded output**. It gives yo
 **Record these:**
 
 ```
-tickLower        ______________________________________
-tickUpper        ______________________________________
-amount0          ______________________________________
-amount1          ______________________________________
-Task3 address 0x ______________________________________
+tickLower        -31800
+tickUpper        -23800
+amount0          -35655717754664493320113
+amount1          -2302908830800839836073
+Task3 address    0xddaAd340b0f1Ef65169Ae5E41A8b10776a75482d
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
