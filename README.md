@@ -259,6 +259,9 @@ the terminal, expand the transaction and look at **decoded output**. It gives yo
 ```
 tickLower        -31800
 tickUpper        -23800
+
+how many units of currency0 and currency1 your Task3Liquidity contract actually handed over to the pool to fund that liquidity position. These come straight out of the BalanceDelta your addLiquidity call returned:
+
 amount0          -35655717754664493320113
 amount1          -2302908830800839836073
 Task3 address    0xddaAd340b0f1Ef65169Ae5E41A8b10776a75482d
