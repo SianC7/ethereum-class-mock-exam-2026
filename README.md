@@ -40,9 +40,9 @@ terminal at the bottom. After a few seconds it prints three addresses.
 **Step 5.** Copy those three addresses into the table below. You will paste them repeatedly. (There is a button that says *EDIT* at the top of this page, click it to edit this markdown file.)
 
 ```
-  Pool manager     0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
-  Liquidity router 0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47
-  Swap router      0xDA0bab807633f07f013f94DD0E6A4F96F8742B53
+  Pool manager     0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47
+  Liquidity router 0xDA0bab807633f07f013f94DD0E6A4F96F8742B53
+  Swap router      0x358AA13c52544ECCEF6B0ADD0f801012ADAD5eE3
 ```
 
 > **If you reload the page or change the Environment, everything you deployed is wiped.** You would
@@ -182,7 +182,7 @@ alphaIsCurrency0        False
 poolId                  0x6238100d7dee104d231d44371adb98c6f9311fae97e29a16e97a49c8829cb165
 startingSqrtPriceX96    19807040628566084398385987584
 tick after openPool     -27728
-Task2Pool address       0xf8e81D47203A594245E36C48e151709F0C19fBe8
+Task2Pool address       0x9D7f74d0C41E726EC95884E0e97Fa6129e3b5E99
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
