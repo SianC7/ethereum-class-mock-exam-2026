@@ -21,7 +21,12 @@ contract Task3Liquidity is ExamBase {
     IPoolModifyLiquidityTest public immutable liquidityRouter;
 
     event LiquidityProvided(
-        bytes32 poolId, int24 tickLower, int24 tickUpper, int256 liquidityDelta, int256 amount0, int256 amount1
+        bytes32 poolId,
+        int24 tickLower,
+        int24 tickUpper,
+        int256 liquidityDelta,
+        int256 amount0,
+        int256 amount1
     );
 
     constructor(
@@ -41,11 +46,15 @@ contract Task3Liquidity is ExamBase {
     }
 
     /// @notice Adds liquidity between two ticks.
-    function addLiquidity(int24 tickLower, int24 tickUpper, int256 liquidityDelta)
-        external
-        returns (int256 amount0, int256 amount1)
-    {
-        require(poolExists(), "the pool is not open, run Task 2 first and check your constructor values match");
+    function addLiquidity(
+        int24 tickLower,
+        int24 tickUpper,
+        int256 liquidityDelta
+    ) external returns (int256 amount0, int256 amount1) {
+        require(
+            poolExists(),
+            "the pool is not open, run Task 2 first and check your constructor values match"
+        );
         require(liquidityDelta > 0, "liquidity must be greater than zero");
         require(tickLower < tickUpper, "tickLower must be below tickUpper");
 
@@ -59,9 +68,13 @@ contract Task3Liquidity is ExamBase {
         // One require, one condition, covering both ticks at once. Join the two
         // halves with &&.
         //
-        // Replace the condition marked below.
-
-        require(true /* replace: both ticks are on the grid */, "a tick is not a multiple of the tick spacing");
+        // ExamBase stores it in a public immutable state variable called TICK_SPACING
+        // (set in its constructor from _tickSpacing, see ExamBase.sol:37). Since Task3Liquidity inherits from ExamBase,
+        // you can just reference it directly by name inside the contract — no getter call needed.
+        require(
+            (tickLower % TICK_SPACING == 0) && (tickUpper % TICK_SPACING == 0),
+            "a tick is not a multiple of the tick spacing"
+        );
 
         // TODO 3.2 --------------------------------------------------------
         // Liquidity only earns while the price sits inside your range, so the range
@@ -69,12 +82,14 @@ contract Task3Liquidity is ExamBase {
         // each one gets its own require so the message tells you which end is wrong:
         //
         //     tickNow must be at or above tickLower
+        bool lowerThan = tickNow >= tickLower;
         //     tickNow must be strictly below tickUpper
+        bool higherThan = tickNow < tickUpper;
         //
         // Replace the two conditions marked below.
 
-        require(true /* replace: tickNow is not below tickLower */, "the live tick is below your range");
-        require(true /* replace: tickNow is strictly below tickUpper */, "the live tick is at or above your range");
+        require(lowerThan, "the live tick is below your range");
+        require(higherThan, "the live tick is at or above your range");
 
         // TODO 3.3 --------------------------------------------------------
         // Ask the router to add the liquidity. The call looks like this:
@@ -92,12 +107,28 @@ contract Task3Liquidity is ExamBase {
         //
         // It gives you back a BalanceDelta. Replace the line below with that call.
 
-        BalanceDelta delta = BalanceDelta.wrap(0); // <-- replace this
+        BalanceDelta delta = liquidityRouter.modifyLiquidity(
+            poolKey(),
+            ModifyLiquidityParams({
+                tickLower: tickLower,
+                tickUpper: tickUpper,
+                liquidityDelta: liquidityDelta,
+                salt: bytes32(0)
+            }),
+            ""
+        );
 
         // Provided. amount0 and amount1 come back negative, because the tokens left
         // this contract and went into the pool.
         amount0 = delta.amount0();
         amount1 = delta.amount1();
-        emit LiquidityProvided(poolId(), tickLower, tickUpper, liquidityDelta, amount0, amount1);
+        emit LiquidityProvided(
+            poolId(),
+            tickLower,
+            tickUpper,
+            liquidityDelta,
+            amount0,
+            amount1
+        );
     }
 }
