@@ -40,9 +40,9 @@ terminal at the bottom. After a few seconds it prints three addresses.
 **Step 5.** Copy those three addresses into the table below. You will paste them repeatedly. (There is a button that says *EDIT* at the top of this page, click it to edit this markdown file.)
 
 ```
-  Pool manager     0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47
-  Liquidity router 0xDA0bab807633f07f013f94DD0E6A4F96F8742B53
-  Swap router      0x358AA13c52544ECCEF6B0ADD0f801012ADAD5eE3
+  Pool manager     0xd9145CCE52D386f254917e481eB44e9943F39138
+  Liquidity router 0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8
+  Swap router      0xf8e81D47203A594245E36C48e151709F0C19fBe8
 ```
 
 > **If you reload the page or change the Environment, everything you deployed is wiped.** You would
@@ -133,8 +133,8 @@ Deployment two, your token B: same again, with `Cafeteria Points`, `CAFE`, and t
 recover if you lose them. (Replace the underscores in the table below with your addresses, the 0x is just a hint at what the address should look like, so remove it too before you paste.)
 
 ```
-Token A address 0xd9145CCE52D386f254917e481eB44e9943F39138 (TUT)
-Token B address 0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8 (CAFE)
+Token A address 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B (TUT)
+Token B address 0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47 (CAFE)
 ```
 
 ---
@@ -179,10 +179,10 @@ one becomes `currency0`. Your code picks the right one in `TODO 2.1`.
 
 ```
 alphaIsCurrency0        False
-poolId                  0x6238100d7dee104d231d44371adb98c6f9311fae97e29a16e97a49c8829cb165
+poolId                  0x3506df81c3c8b3f3179c57703d39a08a7b6def1a5347d9875e43d1c3603d0833
 startingSqrtPriceX96    19807040628566084398385987584
 tick after openPool     -27728
-Task2Pool address       0x9D7f74d0C41E726EC95884E0e97Fa6129e3b5E99
+Task2Pool address       0xDA0bab807633f07f013f94DD0E6A4F96F8742B53
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
@@ -264,7 +264,7 @@ how many units of currency0 and currency1 your Task3Liquidity contract actually 
 
 amount0          -35655717754664493320113
 amount1          -2302908830800839836073
-Task3 address    0xddaAd340b0f1Ef65169Ae5E41A8b10776a75482d
+Task3 address    0x9D7f74d0C41E726EC95884E0e97Fa6129e3b5E99
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
@@ -325,9 +325,9 @@ of the token, the same as everything else.
 **Record these:**
 
 ```
-predicted output    ______________________________________
-actual output       ______________________________________
-Task4 address     0x ______________________________________
+predicted output    79200000000000000000
+actual output       79168649214910895285
+Task4 address       0xb27A31f1b0AF2946B7F582768f03239b1eC07c2c
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
