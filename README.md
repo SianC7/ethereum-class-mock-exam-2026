@@ -40,9 +40,9 @@ terminal at the bottom. After a few seconds it prints three addresses.
 **Step 5.** Copy those three addresses into the table below. You will paste them repeatedly. (There is a button that says *EDIT* at the top of this page, click it to edit this markdown file.)
 
 ```
-  Pool manager     0xd9145CCE52D386f254917e481eB44e9943F39138
-  Liquidity router 0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8
-  Swap router      0xf8e81D47203A594245E36C48e151709F0C19fBe8
+  Pool manager     0x5FD6eB55D12E759a21C09eF703fe0CBa1DC9d88D
+  Liquidity router 0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE
+  Swap router      0x3328358128832A260C76A4141e19E2A943CD4B6D
 ```
 
 > **If you reload the page or change the Environment, everything you deployed is wiped.** You would
@@ -133,8 +133,8 @@ Deployment two, your token B: same again, with `Cafeteria Points`, `CAFE`, and t
 recover if you lose them. (Replace the underscores in the table below with your addresses, the 0x is just a hint at what the address should look like, so remove it too before you paste.)
 
 ```
-Token A address 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B (TUT)
-Token B address 0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47 (CAFE)
+Token A address 0x5e17b14ADd6c386305A32928F985b29bbA34Eff5 (TUT)
+Token B address 0xe2899bddFD890e320e643044c6b95B9B0b84157A (CAFE)
 ```
 
 ---
@@ -178,11 +178,11 @@ one becomes `currency0`. Your code picks the right one in `TODO 2.1`.
 **Record these:**
 
 ```
-alphaIsCurrency0        False
-poolId                  0x3506df81c3c8b3f3179c57703d39a08a7b6def1a5347d9875e43d1c3603d0833
-startingSqrtPriceX96    19807040628566084398385987584
-tick after openPool     -27728
-Task2Pool address       0xDA0bab807633f07f013f94DD0E6A4F96F8742B53
+alphaIsCurrency0        True
+poolId                  0x5aa75899674568e9290df462d6f9d867b0ce5cd13b95ac50b231c43cc1609ca2
+startingSqrtPriceX96    316912650057057350374175801344
+tick after openPool     27727
+Task2Pool address       0x93f8dddd876c7dBE3323723500e83E202A7C96CC
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
@@ -238,17 +238,17 @@ Your live tick may well be negative, depending on which of your tokens became cu
 normal and nothing is wrong. The same method works: with spacing 200 and a live tick of -8642, you
 could use -8800 in the middle, so -12800 and -4800.
 
-With spacing 200 and live tick -27728:
+With spacing 200 and live tick 27727:
 
-Step 1 — snap down to the nearest multiple of 200 (more negative):
--27728 / 200 = -138.64 → round down (away from zero, more negative) → -139 × 200 = -27800
+Step 1 — snap down to the nearest multiple of 200:
+27727 / 200 = 138.64 → round down  → 138 × 200 = 27600
 
-Check: -27800 ≤ -27728 < -27600 ✓ (it's the multiple at or below).
+Check: 27600 ≤ 27727
 
 Step 2 — go 20 spacings (4000) either side:
 
-tickLower = -27800 − 4000 = -31800
-tickUpper = -27800 + 4000 = -23800
+tickLower = 27600 − 4000 = 23600
+tickUpper = 27600 + 4000 = 31600
 
 **Call `addLiquidity`** with your `tickLower`, your `tickUpper`, and `50000000000000000000000`. In
 the terminal, expand the transaction and look at **decoded output**. It gives you `amount0` and
@@ -257,14 +257,14 @@ the terminal, expand the transaction and look at **decoded output**. It gives yo
 **Record these:**
 
 ```
-tickLower        -31800
-tickUpper        -23800
+tickLower        23600
+tickUpper        31600
 
 how many units of currency0 and currency1 your Task3Liquidity contract actually handed over to the pool to fund that liquidity position. These come straight out of the BalanceDelta your addLiquidity call returned:
 
-amount0          -35655717754664493320113
-amount1          -2302908830800839836073
-Task3 address    0x9D7f74d0C41E726EC95884E0e97Fa6129e3b5E99
+amount0          -2200431510220132625644
+amount1          -37290889336267464876407
+Task3 address    0x406AB5033423Dcb6391Ac9eEEad73294FA82Cfbc
 ```
 
 *Remember to get the address of the deployed contract, click the copy icon next to the address in the **Deployed Contracts** section.*
@@ -325,8 +325,8 @@ of the token, the same as everything else.
 **Record these:**
 
 ```
-predicted output    79200000000000000000
-actual output       79168649214910895285
+predicted output    309375000000000000
+actual output       309367343158256833
 Task4 address       0xb27A31f1b0AF2946B7F582768f03239b1eC07c2c
 ```
 
