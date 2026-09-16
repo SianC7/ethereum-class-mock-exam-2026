@@ -80,7 +80,7 @@ tickLower = 27600 − 4000 = 23600
 
 tickUpper = 27600 + 4000 = 31600
 
-If the range sat entirely below the live tick, the pool would take 100% token B (currency1) and leave token A (currency0) untouched. A tick encodes price = 1.0001^tick, i.e. currency1 per unit of currency0. A position converts from 100% currency0 at tickLower to 100% currency1 at tickUpper as price rises through it; since live price already sits above the whole range, that conversion is already complete, so minting it now must be funded entirely in currency1.
+If the range sat entirely below the live tick, the pool would have taken 100% currency1 (token B) and left currency0 (token A) untouched. A tick encodes price = 1.0001^tick, where that price means currency1 per unit of currency0 (currency1/currency0). As tick rate decreases, the price decreases, meaning it becomes cheaper to buy currency0 using currency1. A range below the live tick is at a price lower than today's rate and functions as a buy order: wait for currency0 to get cheap enough before using currency1 to buy currency0. Since the tick drop has not happened yet, the position holds only the currency1 (token B) it's ready to spend, and no currency0 (token A).
 
 ---
 
@@ -99,6 +99,6 @@ Price = currency1/currency0 = 16 (1 TUT = 16 CAFE). sqrtPriceX96 = sqrt(price) *
 
 The protocol stores the square root rather than the price itself because Uniswap's core liquidity formulas are linear in sqrtPrice, so swaps and liquidity math avoid taking square roots at runtime, and it keeps values from overflowing: squaring the raw price directly could exceed 256 bits, while sqrtPrice fits safely in Q64.96.
 
-Tick came out at ~27727 because tick = log(16) / log(1.0001) ≈ 27726.6, rounded to the nearest valid tick.
+Tick came out at ~27727 because tick = ln(16) / ln(1.0001) ≈ 27727.27, rounded to the nearest valid tick.
 
 ---
